@@ -1,0 +1,676 @@
+@font-face {
+  font-family: "NotoSans-Black";
+  src: url("../include/NotoSans-Black.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "RobotoCondensed";
+  src: url("../include/RobotoCondensed.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../include/Roboto-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Oswald";
+  src: url("../include/Oswald.ttf") format("truetype");
+}
+
+/* Regular versions */
+@font-face {
+  font-family: 'made_tommy';
+  src: url('../include/made_tommy_thin-webfont.woff2') format('woff2'),
+       url('../include/made_tommy_thin-webfont.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'made_tommy';
+  src: url('../include/made_tommy_light-webfont.woff2') format('woff2'),
+       url('../include/made_tommy_light-webfont.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'made_tommy';
+  src: url('../include/made_tommy_regular-webfont.woff2') format('woff2'),
+       url('../include/made_tommy_regular-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'made_tommy';
+  src: url('../include/made_tommy_medium-webfont.woff2') format('woff2'),
+       url('../include/made_tommy_medium-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'made_tommy';
+  src: url('../include/made_tommy_bold-webfont.woff2') format('woff2'),
+       url('../include/made_tommy_bold-webfont.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'made_tommy';
+  src: url('../include/made_tommy_extrabold-webfont.woff2') format('woff2'),
+       url('../include/made_tommy_extrabold-webfont.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'made_tommy';
+  src: url('../include/made_tommy_black-webfont.woff2') format('woff2'),
+       url('../include/made_tommy_black-webfont.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* Outline versions - using a separate family name since they're stylistically different */
+@font-face {
+  font-family: 'made_tommy_outline';
+  src: url('../include/made_tommy_thin_outline-webfont.woff2') format('woff2'),
+       url('../include/made_tommy_thin_outline-webfont.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'made_tommy_outline';
+  src: url('../include/made_tommy_light_outline-webfont.woff2') format('woff2'),
+       url('../include/made_tommy_light_outline-webfont.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'made_tommy_outline';
+  src: url('../include/made_tommy_regular_outline-webfont.woff2') format('woff2'),
+       url('../include/made_tommy_regular_outline-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'made_tommy_outline';
+  src: url('../include/made_tommy_medium_outline-webfont.woff2') format('woff2'),
+       url('../include/made_tommy_medium_outline-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'made_tommy_outline';
+  src: url('../include/made_tommy_bold_outline-webfont.woff2') format('woff2'),
+       url('../include/made_tommy_bold_outline-webfont.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'made_tommy_outline';
+  src: url('../include/made_tommy_extrabold_outline-webfont.woff2') format('woff2'),
+       url('../include/made_tommy_extrabold_outline-webfont.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'made_tommy_outline';
+  src: url('../include/made_tommy_black_outline-webfont.woff2') format('woff2'),
+       url('../include/made_tommy_black_outline-webfont.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
+
+body {
+  font-family: "made_tommy";
+  font-weight: bold;
+  overflow: hidden;
+  margin: 0;
+  width: 1920px;
+  height: 1080px;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12))
+    drop-shadow(0 3px 1px rgba(0, 0, 0, 0.14))
+    drop-shadow(0 1px 5px rgba(0, 0, 0, 0.12))
+    drop-shadow(0 -1px 2px rgba(0, 0, 0, 0.1));
+  letter-spacing: 1;
+  text-transform: uppercase;
+  opacity: 0;
+}
+
+.anim_container_outer {
+  position: absolute;
+  overflow: hidden;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1920px;
+  height: 1080px;
+}
+
+.anim_container_inner {
+  position: absolute;
+  overflow: hidden;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1920px;
+  height: 1080px;
+}
+
+.container {
+  color: var(--text-color);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.base_container_outer {
+  overflow: hidden;
+  width: 1200px;
+  position: absolute;
+  top: 16px;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.base_container {
+  position: absolute;
+  color: var(--text-color);
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  border-radius: 999999999px;
+  background-image: linear-gradient(to bottom, var(--ssbtr-grapefruit), var(--ssbtr-yellow));
+  align-items: stretch;
+  justify-content: stretch;
+  width: 1200px;
+  padding: 4px;
+  gap: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.base_container_inner {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  border-radius: 9999999999px;
+  align-items: center;
+  align-self: stretch;
+  padding: 0 8px;
+  gap: 12px;
+  overflow: visible;
+  /* position: relative; */
+  background: radial-gradient(circle at center,var(--ssbtr-purple-700) 25%, var(--ssbtr-purple-800) 75%);
+}
+
+.fullwidth .base_container_outer {
+  width: 100vw;
+  top: 0;
+  left: 0;
+  transform: none;
+}
+
+.fullwidth .base_container {
+  width: 100vw;
+  border-radius: 0;
+}
+
+.base_container .line {
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.mid_col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-width: calc(1200px - 8px);
+  padding: 0 16px;
+  height: 90px;
+  justify-content: space-evenly;
+  box-sizing: border-box;
+}
+
+.fullwidth .mid_col {
+  max-width: 100%;
+}
+
+.main_content {
+  display: flex;
+  align-items: center
+}
+
+.set_meta {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--ssbtr-white);
+}
+
+.phase-container {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  gap: 8px;
+}
+
+.phase {
+  font-size: 16px;
+}
+
+.phase .text {
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  text-shadow: 1.73px 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+.wave-decoration {
+  background-image: url('../include/ssbtr-wave-short.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 26px;
+  flex-shrink: 0;
+  height: auto;
+  aspect-ratio: 2 / 1;
+  filter: brightness(0) invert(1) drop-shadow(1.73px 1px 6px rgba(0, 0, 0, 0.6));
+}
+
+.match {
+  font-size: 26px;
+  background: linear-gradient(120deg, #FFD659 60%, #E36E58);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+  filter: drop-shadow(1.73px 1px 6px rgba(0, 0, 0, 0.6));
+}
+
+.best_of {
+  font-size: 13px;
+  width: 100%;
+  font-weight: medium;
+}
+
+.best_of .text {
+  justify-content: center;
+}
+
+.player.container {
+  width: 100%;
+  padding: 4px 4px;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.p1.container {
+  background-position: 100% 0;
+  left: 380px;
+  flex-direction: row;
+}
+
+.p2.container {
+  background-position: 0 0;
+  flex-direction: row-reverse;
+}
+
+.name_twitter {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  justify-content: center;
+  padding-left: 12px;
+  padding-right: 12px;
+  box-sizing: border-box;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.p2 .name_twitter {
+  justify-content: flex-end;
+}
+
+.player_info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.player_name_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: "made_tommy";
+  max-width: 100%;
+  font-size: 22px;
+}
+
+.p2 .player_name_container {
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.p2 .seed,
+.p2 .player_name,
+.p2 .sponsor {
+  text-align: right;
+}
+
+.sponsor {
+  font-weight: medium;
+  background: rgba(0, 0, 0, 0.4);
+  font-size: 12px;
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999999px;
+  flex-shrink: 0;
+}
+
+.seed {
+  font-size: 17px;
+  font-weight: normal;
+  text-transform: uppercase;
+  color: var(--ssbtr-white)
+}
+
+.name_twitter .twitter {
+  font-size: 14px;
+}
+
+.twitter_logo {
+  -webkit-mask-image: url(./twitter.svg);
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  background: var(--text-color);
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+}
+
+.light .twitter_logo {
+  filter: invert(1);
+}
+
+.logo {
+  position: absolute;
+  top: 128px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100px;
+  background-image: url("../logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: var(--border-radius);
+  z-index: 9;
+}
+
+.info.container {
+  left: 50%;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-position: center;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  font-size: 20px;
+}
+
+.info.container_inner {
+  display: flex;
+  width: 100%;
+  font-size: inherit;
+  justify-content: space-around;
+}
+
+.info.container_inner > div {
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.info.container.top {
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 36px;
+  padding: 8px 8px;
+}
+
+.tournament_name {
+  font-size: 18px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.info.container.bottom {
+  top: 42px;
+  left: 42px;
+  display: flex;
+  justify-content: center;
+  height: unset;
+  flex-direction: column;
+  width: 280px;
+  height: 64px;
+  font-size: 20px;
+  padding: 4px 10px;
+}
+
+.icon {
+  flex-shrink: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  /* background: #3f3f46; */
+}
+
+.icon div:not(.text) {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.flags_container {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.p2 .flags_container {
+  flex-direction: row-reverse;
+}
+
+.flag {
+  display: inline-block;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999999px;
+}
+
+.flagname {
+  font-size: 14px;
+  text-align: center;
+}
+
+.sponsor_icon > div > div {
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--border-radius);
+}
+
+.characters_container {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  right: 0;
+  padding: 0px 10%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.character_container {
+  display: flex;
+  height: 100%;
+  flex-shrink: 0;
+  width: 39%;
+  overflow: hidden;
+  mix-blend-mode: luminosity;
+  /* object-fit: contain; */
+}
+
+.tsh_character > div {
+  opacity: 0.6;
+}
+
+.tsh_character::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* background: linear-gradient(
+    90deg,
+    var(--bg-color) 0,
+    transparent 40%,
+    transparent 60%,
+    var(--bg-color) 100%
+  ); */
+  top: 0;
+  left: 0;
+}
+
+.p1.character_container::after {
+  position: absolute;
+  content: "";
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  /* background: linear-gradient(90deg, transparent 50%, var(--bg-color)); */
+  pointer-events: none;
+}
+
+.p2.character_container::after {
+  position: absolute;
+  content: "";
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  /* background: linear-gradient(-90deg, transparent 50%, var(--bg-color)); */
+  pointer-events: none;
+}
+
+.p2 .tsh_character {
+  transform: scaleX(-1);
+}
+
+.p1.character_container .icon {
+  background: var(--p1-score-bg-color);
+}
+
+.p2.character_container .icon {
+  background: var(--p2-score-bg-color);
+}
+
+.character_container > div {
+  overflow: hidden;
+}
+
+.character_container > div {
+  height: 100%;
+  flex-direction: row;
+  height: 92px;
+}
+
+.p2 .character_container > div {
+  flex-direction: row-reverse;
+}
+
+.character_container > div > div {
+  height: 100%;
+}
+
+.character_container > div > div {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-shrink: 1;
+}
+
+.score {
+  width: 48px;
+  height: 48px;
+  font-size: 48px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.score {
+  color: var(--ssbtr-white);
+}
+
+.losers {
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  font-size: 22px;
+  border-radius: 100%;
+  color: var(--ssbtr-white);
+  background: rgb(45, 14, 58);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.team_names {
+  padding: 0 8px;
+  font-size: 16px;
+}

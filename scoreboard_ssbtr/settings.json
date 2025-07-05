@@ -1,0 +1,11 @@
+{
+  "assets": {
+    "default": {},
+    "ssbu": {
+      "asset_key": "vs_renders_ssbtr",
+      "custom_zoom": 2,
+      "scale_based_on_parent": true,
+      "scale_fill_y": true
+    }
+  }
+}
