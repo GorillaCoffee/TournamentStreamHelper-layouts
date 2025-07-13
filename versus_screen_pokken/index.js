@@ -1,3 +1,19 @@
+function makeVariantHTML(variant){
+  let variantName = variant.display_name;
+  let variantIconPath = variant.icon_path;
+  let str = "";
+  if (variantIconPath) {
+    let y_ = 32;
+    let {x, y} = variant.image_size ?? {x: 32, y: 32};
+    x = x * (y_ / y);
+
+    str += `<img src="${"../../" + variantIconPath}" class = "variant_icon" width="${x}" height="${y_}"/>`
+  } 
+  if (variantName) str += `<span class = "variant_name">${variantName}</span>`;
+
+  return str;
+}
+
 LoadEverything().then(() => {
   let startingAnimation = gsap
     .timeline({ paused: true })
@@ -85,12 +101,34 @@ LoadEverything().then(() => {
           SetInnerHtml($(`.p${t + 1} .seed`), player.seed ? `Seed ${player.seed}` : "");
 
           let characterNames = [];
+          let single_variant = null;
 
           if(!window.ONLINE_AVATAR && !window.PLAYER_AVATAR){
             for (const [p, player] of Object.values(team.player).entries()) {
               let characters = _.get(player, "character");
-              for (const c of Object.values(characters)) {
-                if (c.name) characterNames.push(c.name);
+              let characterValues = Object.values(characters)
+              if (tsh_settings.force_variant_last && characterValues.length > 1){
+                for (const c of characterValues){
+                  if (c.variant){
+                    if (single_variant){
+                      single_variant == false;
+                    } else if (single_variant === null) { //fist variant
+                      single_variant = c.variant;
+                    }
+                  }
+                }
+              }
+              
+              for (const c of characterValues) {
+
+                let res = [];
+                if (c.name) res.push(c.name);
+
+                if (c.variant && !single_variant){ 
+                  res.push(makeVariantHTML(c.variant));
+                }
+
+                characterNames.push(res.join('<div class = "variant_intercal"></div>'))
               }
             }
           }
@@ -98,7 +136,7 @@ LoadEverything().then(() => {
           SetInnerHtml(
             $(`.p${t + 1} .character_name`),
             `
-                ${characterNames.join(" / ")}
+                ${characterNames.filter(elt=>!!elt).join(" / ") + (single_variant ? makeVariantHTML(single_variant) : "")}
             `
           );
 
@@ -273,7 +311,27 @@ LoadEverything().then(() => {
           for (const [p, player] of Object.values(team.player).entries()) {
             let characters = _.get(player, "character");
             for (const c of Object.values(characters)) {
-              if (c.name) characterNames.push(c.name);
+
+              let res = [];
+                if (c.name) res.push(c.name);
+
+                if (c.variant){
+                  let variantName = c.variant.display_name;
+                  let variantIconPath = c.variant.icon_path;
+                  let str = "";
+                  if (variantIconPath) {
+                    let y_ = 32;
+                    let {x, y} = c.variant.image_size ?? {x: 32, y: 32};
+                    x = x * (y_ / y);
+                    console.log("X ; Y", x, y);
+
+                    str += `<img src="${"../../" + variantIconPath}" class = "variant_icon" width="${x}" height="${y_}"/>`
+                  } 
+                  if (variantName) str += `<span class = "variant_name">${variantName}</span>`
+                  res.push(str);
+                }
+
+                characterNames.push(res.join('<div class = "variant_intercal"></div>'))
             }
           }
         }
@@ -281,7 +339,7 @@ LoadEverything().then(() => {
         SetInnerHtml(
           $(`.p${t + 1} .character_name`),
           `
-              ${characterNames.join(" / ")}
+              ${characterNames.filter(elt=>!!elt).join(" / ")}
           `
         );
 

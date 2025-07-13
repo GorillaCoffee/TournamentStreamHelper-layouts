@@ -13,5 +13,6 @@
       "custom_zoom": 1.2,
       "custom_center": [0.55, 0.4]
     }
-  }
+  },
+  "force_variant_last": false
 }

@@ -550,3 +550,16 @@ body {
 .character_name.text_empty {
   padding: 0 !important;
 }
+
+.variant_icon {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.variant_name {
+  font-size: 22px;
+}
+
+.variant_intercal {
+  width: 6px;
+}

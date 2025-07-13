@@ -326,7 +326,7 @@ LoadEverything().then(() => {
                     .map((point) => point.join(" "))
                     .map((point) => "L" + point)
                     .join(" ")}"
-                  stroke="black" fill="none" stroke-width="5" />`;
+                  stroke="var(--lines)" fill="none" stroke-width="5" />`;
                 }
 
                 // Lines for progressions in

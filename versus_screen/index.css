@@ -515,6 +515,19 @@ body {
   z-index: 999;
 }
 
+.variant_icon {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.variant_name {
+  font-size: 22px;
+}
+
+.variant_intercal {
+  width: 6px;
+}
+
 .character_name {
   position: fixed;
   max-width: 480px;

@@ -5,6 +5,7 @@
   --set-gap: 2;
   --flag-height: 8;
   --title-size: 100px;
+  --lines: black;
 }
 
 body {
@@ -357,9 +358,5 @@ body {
   height: 100vh;
   position: absolute;
   top: 0;
-}
-
-.line {
-  stroke: "black";
-  stroke-width: "5";
+  z-index: -1;
 }

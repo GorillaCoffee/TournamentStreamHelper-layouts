@@ -604,3 +604,17 @@ body {
   display: flex;
   align-items: center;
 }
+
+
+.variant_icon {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.variant_name {
+  font-size: 22px;
+}
+
+.variant_intercal {
+  width: 6px;
+}
