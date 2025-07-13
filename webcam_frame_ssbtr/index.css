@@ -1,0 +1,13 @@
+body {
+  overflow: hidden;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.frame-outer {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--ssbtr-grapefruit), var(--ssbtr-yellow));
+  border-radius: 28px;
+}

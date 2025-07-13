@@ -555,7 +555,7 @@ body {
   display: flex;
   height: 100%;
   flex-shrink: 0;
-  width: 39%;
+  width: 40%;
   overflow: hidden;
   mix-blend-mode: luminosity;
   /* object-fit: contain; */

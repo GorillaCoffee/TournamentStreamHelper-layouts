@@ -144,7 +144,7 @@ body {
   margin: 0;
   width: 1920px;
   height: 1080px;
-  background: radial-gradient(circle at center, #653093, 60%, var(--ssbtr-purple-800));
+  /* background: radial-gradient(circle at center, #653093, 60%, var(--ssbtr-purple-800)); */
 }
 
 .plane {
