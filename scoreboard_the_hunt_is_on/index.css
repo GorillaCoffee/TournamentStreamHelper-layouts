@@ -1,0 +1,496 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700;900&family=Share+Tech+Mono&display=swap');
+
+/* ── Design tokens ─────────────────────────────────────────────── */
+:root {
+  --ink-1: #0a0712;
+  --ink-2: #110a1f;
+  --ink-3: #1c1130;
+  --chrome-1: #2a1240;
+  --violet: #7c3aed;
+  --violet-light: #a78bfa;
+  --violet-dim: #c4b5fd;
+  --magenta: #e11d8c;
+  --magenta-2: #ff3ea5;
+  --text: #f0ecfa;
+  --text-dim: #b8aed4;
+  --text-mute: #6f6391;
+  --font-display: 'Chakra Petch', 'Saira Condensed', system-ui, sans-serif;
+  --font-mono: 'Share Tech Mono', 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ── Canvas ────────────────────────────────────────────────────── */
+html, body {
+  width: 1920px;
+  height: 1080px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  font-family: var(--font-display);
+}
+
+/* ── Banner wrapper (positions the whole unit on canvas) ───────── */
+.banner-wrapper {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  filter: drop-shadow(0 8px 40px rgba(0,0,0,0.6)) drop-shadow(0 0 36px rgba(124,58,237,0.25));
+}
+
+/* ── Banner frame ──────────────────────────────────────────────── */
+.banner-frame {
+  width: 1600px;
+  height: 160px;
+  display: grid;
+  grid-template-columns: 1fr 380px 1fr;
+  background: linear-gradient(180deg, #110a1f 0%, #0a0712 100%);
+  border: 1.75px solid var(--violet-light);
+  clip-path: polygon(2.0125% 0%, 97.9875% 0%, 100% 100%, 0% 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Player sides ──────────────────────────────────────────────── */
+.player-side {
+  display: grid;
+  align-items: stretch;
+  position: relative;
+}
+
+.p1.player-side {
+  grid-template-columns: 230px minmax(0, 1fr);
+  background: radial-gradient(ellipse 85% 110% at 15% 50%,
+    rgba(167,139,250,0.55) 0%,
+    rgba(124,58,237,0.28) 35%,
+    transparent 75%);
+}
+
+.p2.player-side {
+  grid-template-columns: minmax(0, 1fr) 230px;
+  background: radial-gradient(ellipse 85% 110% at 85% 50%,
+    rgba(167,139,250,0.55) 0%,
+    rgba(124,58,237,0.28) 35%,
+    transparent 75%);
+}
+
+/* ── Portrait slots ────────────────────────────────────────────── */
+.portrait-slot {
+  position: relative;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(135deg,
+      rgba(167,139,250,0.1) 0 8px,
+      rgba(167,139,250,0.04) 8px 16px),
+    linear-gradient(180deg, #1d1233 0%, #0e0820 100%);
+  box-shadow: inset 0 0 0 1.5px rgba(167,139,250,0.85);
+}
+
+.p1.portrait-slot {
+  clip-path: polygon(14% 0, 100% 0, 86% 100%, 0 100%);
+}
+
+.p2.portrait-slot {
+  clip-path: polygon(0 0, 86% 0, 100% 100%, 14% 100%);
+}
+
+/* Portrait scan sweep (bounty animation) */
+.portrait-scan-sweep {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 5;
+  display: none;
+}
+
+.portrait-scan-sweep.active {
+  display: block;
+}
+
+.portrait-scan-sweep::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(255,62,165,0.18) 50%,
+    transparent 100%);
+  animation: scan-sweep 2.4s linear infinite;
+}
+
+/* ── Player content column ─────────────────────────────────────── */
+.player-content {
+  min-width: 0;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Player inner (seed + name + score) ────────────────────────── */
+.player-inner {
+  height: 100%;
+  box-sizing: border-box;
+  display: grid;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  padding: 0 18px;
+}
+
+.p1 .player-inner {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.p2 .player-inner {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.player-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  min-width: 0;
+}
+
+.p1 .player-meta { align-items: flex-start; }
+.p2 .player-meta { align-items: flex-end; }
+
+.seed {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.player_info {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  text-transform: uppercase;
+  line-height: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* FitText wraps content in .text — allow scaling */
+.player_info .text {
+  display: inline-block;
+  transform-origin: left center;
+}
+
+.p2 .player_info .text {
+  transform-origin: right center;
+}
+
+.losers {
+  font-size: 28px;
+  color: var(--magenta-2);
+  font-weight: 900;
+  margin: 0 6px;
+}
+
+.team_names {
+  font-size: 28px;
+}
+
+.flags-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.p2 .flags-row {
+  flex-direction: row-reverse;
+}
+
+.flagcountry, .flagstate {
+  width: 32px;
+  height: 22px;
+}
+
+.flagcountry .flag, .flagstate .flag {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 2px;
+}
+
+.twitter {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.twitter_logo {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background-color: var(--text-dim);
+  mask-image: url('./twitter.svg');
+  -webkit-mask-image: url('./twitter.svg');
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  vertical-align: middle;
+}
+
+.sponsor-container {
+  width: 32px;
+  height: 32px;
+  margin-top: 2px;
+}
+
+.sponsor-container div {
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ── Score ─────────────────────────────────────────────────────── */
+.score-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.score {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 68px;
+  color: var(--text);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 22px rgba(124,58,237,0.35);
+}
+
+/* ── Wanted & Breakout stamps ──────────────────────────────────── */
+.wanted-stamp {
+  position: absolute;
+  bottom: 0;
+  height: 44px;
+  display: none;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.wanted-stamp.active {
+  display: block;
+}
+
+.p1 .wanted-stamp {
+  left: -32px;
+  right: 0;
+}
+
+.p2 .wanted-stamp {
+  left: 0;
+  right: -32px;
+}
+
+.stamp-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.stamp-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.stamp-label {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.22em;
+  padding-left: 0.22em;
+  color: var(--violet-dim);
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(124,58,237,0.6);
+  line-height: 1;
+}
+
+.bounty-amount {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  color: #e8e6f0;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 8px rgba(124,58,237,0.6);
+  line-height: 1;
+}
+
+.stamp-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(167,139,250,0.55);
+}
+
+
+/* ── Center column ─────────────────────────────────────────────── */
+.center-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px 12px;
+  border-left: 1.75px solid var(--violet-light);
+  border-right: 1.75px solid var(--violet-light);
+  background: linear-gradient(180deg, rgba(124,58,237,0.08), transparent);
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('../logo.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80% auto;
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.brand-label {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--violet-light);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.tournament_name {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.match {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.05;
+}
+
+.best_of {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: #000;
+  border: 1px solid rgba(167,139,250,0.55);
+  color: var(--violet-dim);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ── Bounty ticker ─────────────────────────────────────────────── */
+.bounty-ticker {
+  width: 1600px;
+  height: 26px;
+  background: #000;
+  border-top: 1.75px solid var(--violet-light);
+  border-bottom: 1.75px solid var(--violet-light);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 24px rgba(124,58,237,0.3);
+  display: none;
+}
+
+.bounty-ticker.active {
+  display: block;
+}
+
+.ticker-track {
+  display: flex;
+  white-space: nowrap;
+  height: 100%;
+  align-items: center;
+  animation: ticker 30s linear infinite;
+}
+
+.ticker-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--violet-dim);
+  padding-right: 40px;
+  flex-shrink: 0;
+}
+
+/* ── Keyframe animations ───────────────────────────────────────── */
+@keyframes scan-sweep {
+  0%   { top: -40%; }
+  100% { top: 100%;  }
+}
+
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes streak-flicker {
+  0%, 100% { opacity: 1;   }
+  50%       { opacity: 0.7; }
+}
+
+
+/* Bounty score glow when wanted */
+.p1.player-side.bounty-active .score,
+.p2.player-side.bounty-active .score {
+  text-shadow: 0 0 22px rgba(124,58,237,0.7);
+}

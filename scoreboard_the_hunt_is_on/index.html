@@ -1,0 +1,164 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="../include/globals.js"></script>
+    <link rel="stylesheet" href="../main.css" />
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="banner-wrapper">
+
+      <div class="banner-frame">
+
+        <!-- ── P1 side: portrait LEFT, info RIGHT ── -->
+        <div class="p1 player-side">
+
+          <div class="p1 character_container portrait-slot">
+            <div class="portrait-scan-sweep"></div>
+          </div>
+
+          <div class="player-content">
+
+            <div class="wanted-stamp">
+              <svg class="stamp-svg" viewBox="0 0 400 44" preserveAspectRatio="none"
+                   xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="wbg-p1" x1="0" y1="0" x2="0" y2="44" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#2a1240"/>
+                    <stop offset="42%" stop-color="#180a2c"/>
+                    <stop offset="100%" stop-color="#0b0518"/>
+                  </linearGradient>
+                  <linearGradient id="wshine-p1" x1="0" y1="0" x2="400" y2="0" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#a78bfa" stop-opacity="0"/>
+                    <stop offset="55%" stop-color="#c4a8ff" stop-opacity="0.18"/>
+                    <stop offset="100%" stop-color="#ff3ea5" stop-opacity="0.14"/>
+                  </linearGradient>
+                  <pattern id="wgrid-p1" width="6" height="6" patternUnits="userSpaceOnUse">
+                    <path d="M0 6 L6 0" stroke="#a78bfa" stroke-width="0.5" stroke-opacity="0.08"/>
+                  </pattern>
+                </defs>
+                <!-- P1 left stamp: slant at top-left -->
+                <polygon points="6.2,0 400,0 400,44 0,44"
+                         fill="url(#wbg-p1)" stroke="none"/>
+                <polygon points="6.2,0 400,0 400,44 0,44"
+                         fill="url(#wgrid-p1)" stroke="none"/>
+                <polygon points="6.2,0 400,0 400,44 0,44"
+                         fill="url(#wshine-p1)" stroke="none"/>
+                <polygon points="6.2,0 400,0 400,44 0,44"
+                         fill="none" stroke="#a78bfa" stroke-width="1.75"
+                         vector-effect="non-scaling-stroke"/>
+              </svg>
+              <div class="stamp-content">
+                <span class="stamp-label mono">WANTED</span>
+                <div class="stamp-divider"></div>
+                <span class="bounty-amount display"></span>
+              </div>
+            </div>
+
+            <div class="player-inner">
+              <div class="player-meta">
+                <div class="seed mono"></div>
+                <div class="player_info display"></div>
+                <div class="flags-row">
+                  <div class="flagcountry"></div>
+                  <div class="flagstate"></div>
+                  <div class="twitter mono"></div>
+                </div>
+                <div class="sponsor-container"></div>
+              </div>
+              <div class="score-col">
+                <div class="score display"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── Center column ── -->
+        <div class="center-col">
+          <div class="logo-bg"></div>
+          <div class="brand-label mono">THE HUNT IS ON</div>
+          <div class="tournament_name display"></div>
+          <div class="match display"></div>
+          <div class="best_of mono"></div>
+        </div>
+
+        <!-- ── P2 side: info LEFT, portrait RIGHT ── -->
+        <div class="p2 player-side">
+
+          <div class="player-content">
+
+            <div class="wanted-stamp">
+              <svg class="stamp-svg" viewBox="0 0 400 44" preserveAspectRatio="none"
+                   xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="wbg-p2" x1="0" y1="0" x2="0" y2="44" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#2a1240"/>
+                    <stop offset="42%" stop-color="#180a2c"/>
+                    <stop offset="100%" stop-color="#0b0518"/>
+                  </linearGradient>
+                  <linearGradient id="wshine-p2" x1="400" y1="0" x2="0" y2="0" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#a78bfa" stop-opacity="0"/>
+                    <stop offset="55%" stop-color="#c4a8ff" stop-opacity="0.18"/>
+                    <stop offset="100%" stop-color="#ff3ea5" stop-opacity="0.14"/>
+                  </linearGradient>
+                  <pattern id="wgrid-p2" width="6" height="6" patternUnits="userSpaceOnUse">
+                    <path d="M0 6 L6 0" stroke="#a78bfa" stroke-width="0.5" stroke-opacity="0.08"/>
+                  </pattern>
+                </defs>
+                <!-- P2 right stamp: slant at top-right -->
+                <polygon points="0,0 393.8,0 400,44 0,44"
+                         fill="url(#wbg-p2)" stroke="none"/>
+                <polygon points="0,0 393.8,0 400,44 0,44"
+                         fill="url(#wgrid-p2)" stroke="none"/>
+                <polygon points="0,0 393.8,0 400,44 0,44"
+                         fill="url(#wshine-p2)" stroke="none"/>
+                <polygon points="0,0 393.8,0 400,44 0,44"
+                         fill="none" stroke="#a78bfa" stroke-width="1.75"
+                         vector-effect="non-scaling-stroke"/>
+              </svg>
+              <div class="stamp-content">
+                <span class="bounty-amount display"></span>
+                <div class="stamp-divider"></div>
+                <span class="stamp-label mono">WANTED</span>
+              </div>
+            </div>
+
+            <div class="player-inner">
+              <div class="score-col">
+                <div class="score display"></div>
+              </div>
+              <div class="player-meta">
+                <div class="seed mono"></div>
+                <div class="player_info display"></div>
+                <div class="flags-row">
+                  <div class="twitter mono"></div>
+                  <div class="flagstate"></div>
+                  <div class="flagcountry"></div>
+                </div>
+                <div class="sponsor-container"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="p2 character_container portrait-slot">
+            <div class="portrait-scan-sweep"></div>
+          </div>
+
+        </div>
+
+      </div><!-- /.banner-frame -->
+
+      <!-- Bounty ticker: hidden by default, shown when any player has bounty -->
+      <div class="bounty-ticker">
+        <div class="ticker-track">
+          <div class="ticker-text display"></div>
+          <div class="ticker-text display"></div>
+        </div>
+      </div>
+
+    </div><!-- /.banner-wrapper -->
+    <script src="index.js"></script>
+  </body>
+</html>
