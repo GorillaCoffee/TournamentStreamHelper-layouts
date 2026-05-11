@@ -8,17 +8,13 @@ LoadEverything().then(() => {
       duration: 0.3,
       clipPath: "polygon(50% 0%, 50% 0%, 50% 100%, 50% 100%)",
       ease: "power2.inOut"
-    }, 0)
-    .from(".bounty-ticker", {
-      duration: 0.3,
-      scaleX: 0,
-      ease: "power2.inOut",
-      transformOrigin: "center center"
     }, 0);
 
   Start = async () => {
     startingAnimation.restart();
   };
+
+  let bountyHideTimeout = null;
 
   Update = async (event) => {
     const data = event.data;
@@ -161,10 +157,7 @@ LoadEverything().then(() => {
       : "";
     SetInnerHtml($(".tournament_name"), tournamentLabel);
     SetInnerHtml($(".match"), score.match || "");
-    SetInnerHtml(
-      $(".best_of"),
-      score.best_of_text ? `Best of ${score.best_of_text}` : ""
-    );
+    SetInnerHtml($(".best_of"), score.best_of_text || "");
 
     // ── Bounty ticker ─────────────────────────────────────────────
     const t1 = score.team["1"].player["1"] || {};
@@ -182,10 +175,43 @@ LoadEverything().then(() => {
       const segment = wantedNames
         .map(n => `◆ WANTED · ${n.toUpperCase()} · $${amount} BOUNTY ON THEIR HEAD`)
         .join('  ·  ');
-      // Duplicate text for seamless CSS marquee loop
-      $(".ticker-text").text(segment + "    ");
+      // Repeat the segment until it's wider than the container so there's no gap
+      const sep = "    ◆    ";
+      let loopText = segment;
+      while (loopText.length * 10 < 1400) loopText += sep + segment;
+      loopText += sep; // trailing separator so the seam matches internal gaps
+
+      // Cancel any in-progress close animation and clear all GSAP inline styles
+      gsap.killTweensOf(".bounty-ticker");
+      gsap.set(".bounty-ticker", { clearProps: "all" });
+
+      $(".ticker-text").text(loopText);
       $(".bounty-ticker").addClass("active");
+      // Measure one span's width after layout, then drive speed at 120px/s
+      requestAnimationFrame(() => {
+        const spanWidth = $(".ticker-text").first()[0].scrollWidth;
+        const duration = spanWidth / 120;
+        const track = $(".ticker-track")[0];
+        track.style.animation = "none";
+        track.getBoundingClientRect(); // force reflow to restart animation
+        track.style.animation = `ticker ${duration}s linear infinite`;
+      });
+      // Hide after 6 seconds; reset the timer if the bounty updates mid-display
+      clearTimeout(bountyHideTimeout);
+      bountyHideTimeout = setTimeout(() => {
+        gsap.to(".bounty-ticker", {
+          clipPath: "inset(0% 0% 100% 0%)",
+          duration: 0.5,
+          ease: "power2.inOut",
+          onComplete: () => {
+            $(".bounty-ticker").removeClass("active");
+            gsap.set(".bounty-ticker", { clearProps: "clipPath" });
+          }
+        });
+      }, 6000);
     } else {
+      clearTimeout(bountyHideTimeout);
+      gsap.killTweensOf(".bounty-ticker");
       $(".bounty-ticker").removeClass("active");
     }
   };
