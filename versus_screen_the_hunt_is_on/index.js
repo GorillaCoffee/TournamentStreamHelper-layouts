@@ -121,6 +121,13 @@ LoadEverything().then(() => {
             `
           );
 
+          const bountyActive = !!player.bounty_active;
+          const bountyAmount = player.bounty_amount || 50;
+          $(`.p${t + 1} .wanted-badge`).toggleClass("active", bountyActive);
+          if (bountyActive) {
+            $(`.p${t + 1} .wanted-badge`).text(`WANTED · $${bountyAmount}`);
+          }
+
           gsap.to($(`.p${t + 1} .losers_badge`), {
             autoAlpha: team.losers ? 1 : 0,
             overwrite: true,
@@ -276,6 +283,14 @@ LoadEverything().then(() => {
               ${characterNames.join(" / ")}
           `
         );
+
+        const player1 = _.get(team, "player.1") || {};
+        const bountyActive = !!player1.bounty_active;
+        const bountyAmount = player1.bounty_amount || 50;
+        $(`.p${t + 1} .wanted-badge`).toggleClass("active", bountyActive);
+        if (bountyActive) {
+          $(`.p${t + 1} .wanted-badge`).text(`WANTED · $${bountyAmount}`);
+        }
 
         let zIndexMultiplyier = 1;
         if (t == 1) zIndexMultiplyier = -1;
