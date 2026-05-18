@@ -15,6 +15,7 @@ LoadEverything().then(() => {
   };
 
   let bountyHideTimeout = null;
+  let bountyTickerShown = false;
 
   Update = async (event) => {
     const data = event.data;
@@ -165,38 +166,37 @@ LoadEverything().then(() => {
     const p1Wanted = !!t1.bounty_active;
     const p2Wanted = !!t2.bounty_active;
 
-    const wantedNames = [
-      p1Wanted ? (score.team["1"].player["1"].name || "") : null,
-      p2Wanted ? (score.team["2"].player["1"].name || "") : null,
-    ].filter(Boolean);
+    const bountyEntries = [];
+    if (p1Wanted) bountyEntries.push({ wanted: t1.name || "", opponent: t2.name || "", amount: t1.bounty_amount || 50 });
+    if (p2Wanted) bountyEntries.push({ wanted: t2.name || "", opponent: t1.name || "", amount: t2.bounty_amount || 50 });
 
-    if (wantedNames.length > 0) {
-      const amount = (t1.bounty_amount || t2.bounty_amount || 50);
-      const segment = wantedNames
-        .map(n => `◆ WANTED · ${n.toUpperCase()} · $${amount} BOUNTY ON THEIR HEAD`)
-        .join('  ·  ');
-      // Repeat the segment until it's wider than the container so there's no gap
-      const sep = "    ◆    ";
+    const tickerShouldShow = bountyEntries.length > 0;
+
+    if (!tickerShouldShow) bountyTickerShown = false;
+
+    if (tickerShouldShow && !bountyTickerShown) {
+      bountyTickerShown = true;
+      const segment = bountyEntries
+        .map(e => `[WANTED] ${e.opponent.toUpperCase()} MUST UPSET ${e.wanted.toUpperCase()} TO WIN $${e.amount}`)
+        .join('');
+      const sep = "    ·····    ";
       let loopText = segment;
       while (loopText.length * 10 < 1400) loopText += sep + segment;
-      loopText += sep; // trailing separator so the seam matches internal gaps
+      loopText += sep;
 
-      // Cancel any in-progress close animation and clear all GSAP inline styles
       gsap.killTweensOf(".bounty-ticker");
       gsap.set(".bounty-ticker", { clearProps: "all" });
 
       $(".ticker-text").text(loopText);
       $(".bounty-ticker").addClass("active");
-      // Measure one span's width after layout, then drive speed at 120px/s
       requestAnimationFrame(() => {
         const spanWidth = $(".ticker-text").first()[0].scrollWidth;
         const duration = spanWidth / 120;
         const track = $(".ticker-track")[0];
         track.style.animation = "none";
-        track.getBoundingClientRect(); // force reflow to restart animation
+        track.getBoundingClientRect();
         track.style.animation = `ticker ${duration}s linear infinite`;
       });
-      // Hide after 6 seconds; reset the timer if the bounty updates mid-display
       clearTimeout(bountyHideTimeout);
       bountyHideTimeout = setTimeout(() => {
         gsap.to(".bounty-ticker", {
@@ -209,7 +209,7 @@ LoadEverything().then(() => {
           }
         });
       }, 6000);
-    } else {
+    } else if (!tickerShouldShow && $(".bounty-ticker").hasClass("active")) {
       clearTimeout(bountyHideTimeout);
       gsap.killTweensOf(".bounty-ticker");
       $(".bounty-ticker").removeClass("active");

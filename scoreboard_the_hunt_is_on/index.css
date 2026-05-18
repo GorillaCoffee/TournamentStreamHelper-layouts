@@ -115,7 +115,7 @@ html, body {
 .portrait-flags {
   position: absolute;
   z-index: 6;
-  display: flex;
+  display: none; /* temporary */
   gap: 4px;
 }
 
@@ -352,7 +352,7 @@ html, body {
 }
 
 .p1 .wanted-stamp {
-  left: -20px;
+  left: -24px;
   right: 0;
 }
 
@@ -438,7 +438,7 @@ html, body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 80% auto;
-  opacity: 0.18;
+  opacity: 0.5;
   pointer-events: none;
   z-index: 0;
 }
@@ -453,11 +453,11 @@ html, body {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   text-align: center;
-  padding-bottom: 10px;
+  padding-bottom: auto;
   text-shadow: 0 1px 6px rgba(0,0,0,0.95), 0 0 18px rgba(0,0,0,0.7);
 }
 
-.tournament_name {
+.phase_name {
   position: relative;
   z-index: 1;
   font-family: var(--font-display);
@@ -507,11 +507,11 @@ html, body {
   width: 1300px;
   height: 26px;
   background: #000;
-  border-top: 1.75px solid var(--magenta-2);
-  border-bottom: 1.75px solid var(--magenta-2);
+  border-top: 1.75px solid var(--gold);
+  border-bottom: 1.75px solid var(--gold);
   overflow: hidden;
   position: relative;
-  box-shadow: 0 4px 24px rgba(124,58,237,0.3);
+  box-shadow: 0 4px 24px rgba(251,167,43,0.3);
   display: none;
 }
 
@@ -536,7 +536,7 @@ html, body {
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.18em;
-  color: var(--violet-dim);
+  color: var(--gold);
 }
 
 /* ── Keyframe animations ───────────────────────────────────────── */
@@ -571,9 +571,6 @@ html, body {
   transform: scaleX(-1);
 }
 
-/* Artificially force bounty active for P1 */
-.wanted-stamp { display: block; animation: wanted-pulse 1.8s ease-in-out infinite; }
-.portrait-scan-sweep { display: block; }
 
 /* Bounty score glow when wanted */
 .p1.player-side.bounty-active .score,
