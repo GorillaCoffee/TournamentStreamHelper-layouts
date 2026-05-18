@@ -121,12 +121,12 @@ html, body {
 
 .portrait-flags-p1 {
   bottom: 8px;
-  right: 10px;
+  left: 10px;
 }
 
 .portrait-flags-p2 {
   bottom: 8px;
-  left: 40px;
+  right: -10px;
 }
 
 /* Portrait scan sweep (bounty animation) */
@@ -323,7 +323,7 @@ html, body {
   justify-content: center;
   flex-shrink: 0;
   align-self: start;
-  padding-top: 20px;
+  padding-top: 16px;
 }
 
 .score {
@@ -348,6 +348,7 @@ html, body {
 
 .wanted-stamp.active {
   display: block;
+  animation: wanted-pulse 1.8s ease-in-out infinite;
 }
 
 .p1 .wanted-stamp {
@@ -357,7 +358,7 @@ html, body {
 
 .p2 .wanted-stamp {
   left: 0;
-  right: -20px;
+  right: -23px;
 }
 
 .stamp-svg {
@@ -382,9 +383,9 @@ html, body {
   font-size: 15px;
   letter-spacing: 0.22em;
   padding-left: 0.22em;
-  color: var(--magenta-2);
+  color: var(--gold);
   text-transform: uppercase;
-  text-shadow: 0 0 8px rgba(124,58,237,0.6);
+  text-shadow: 0 0 8px rgba(251,167,43,0.7);
   line-height: 1;
 }
 
@@ -393,16 +394,16 @@ html, body {
   font-weight: 700;
   font-size: 16px;
   letter-spacing: 0.04em;
-  color: #e8e6f0;
+  color: var(--gold);
   font-variant-numeric: tabular-nums;
-  text-shadow: 0 0 8px rgba(124,58,237,0.6);
+  text-shadow: 0 0 8px rgba(251,167,43,0.7);
   line-height: 1;
 }
 
 .stamp-divider {
   width: 1px;
   height: 18px;
-  background: rgba(255,62,165,0.55);
+  background: rgba(251,167,43,0.55);
 }
 
 
@@ -549,6 +550,11 @@ html, body {
   to   { transform: translateX(-50%); }
 }
 
+@keyframes wanted-pulse {
+  0%, 100% { filter: drop-shadow(0 0 3px rgba(251,167,43,0.4)); }
+  50%       { filter: drop-shadow(0 0 12px rgba(251,167,43,0.95)); }
+}
+
 @keyframes streak-flicker {
   0%, 100% { opacity: 1;   }
   50%       { opacity: 0.7; }
@@ -566,7 +572,7 @@ html, body {
 }
 
 /* Artificially force bounty active for P1 */
-.wanted-stamp { display: block; }
+.wanted-stamp { display: block; animation: wanted-pulse 1.8s ease-in-out infinite; }
 .portrait-scan-sweep { display: block; }
 
 /* Bounty score glow when wanted */
